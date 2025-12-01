@@ -1,22 +1,15 @@
 ﻿int GetDial(int num, string rotation)
 {
     int value = int.Parse(rotation.Substring(1));
-
-    // move left or right
-    if (rotation[0] == 'L')
-        num -= value;
-    else
-        num += value;
-
-    // wrap between 0 and 99
+    if (rotation[0] == 'L') num -= value;
+    else num += value;
     num %= 100;
     if (num < 0) num += 100;
-
     return num;
 }
-int totalZeroCount = 0;   // total times landed on OR crossed 0
-int num = 50;
 
+int totalZeroCount = 0;
+int num = 50;
 string filePath = "input.txt";
 
 try
@@ -26,26 +19,31 @@ try
         string line;
         while ((line = reader.ReadLine()) != null)
         {
-            int start = num;
-            int end = GetDial(num, line);
             int amount = int.Parse(line.Substring(1));
             char dir = line[0];
-
-            // count passes DURING rotation
-            int passesDuring = amount / 100;  // full circles passing 0
-
-            // add if landed exactly on 0
-            if (end == 0)
-                passesDuring++;
-
-            // total for this move
-            totalZeroCount += passesDuring;
-
-            num = end;
-
+            
+            int start = num;
+            
+            // Key: calculate how many times we pass 0 DURING this rotation
+            if (dir == 'R')
+            {
+                // Right: passes 0 when crossing from 99→0
+                int distanceToZero = (100 - start) % 100;
+                if (amount >= distanceToZero)
+                    totalZeroCount++;  // passes 0 at least once
+                totalZeroCount += amount / 100;  // full circles
+            }
+            else  // 'L'
+            {
+                // Left: passes 0 when crossing from 0→99  
+                if (amount >= start)
+                    totalZeroCount++;  // passes 0 at least once
+                totalZeroCount += amount / 100;  // full circles
+            }
+            
+            num = GetDial(num, line);
         }
     }
-
     Console.WriteLine(totalZeroCount);
 }
 catch (FileNotFoundException)
