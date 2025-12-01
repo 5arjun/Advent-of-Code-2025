@@ -1,0 +1,15 @@
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/bin/Debug/net9.0/Day 1
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/bin/Debug/net9.0/Day 1.deps.json
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/bin/Debug/net9.0/Day 1.runtimeconfig.json
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/bin/Debug/net9.0/Day 1.dll
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/bin/Debug/net9.0/Day 1.pdb
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.GeneratedMSBuildEditorConfig.editorconfig
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.AssemblyInfoInputs.cache
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.AssemblyInfo.cs
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.csproj.CoreCompileInputs.cache
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.sourcelink.json
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.dll
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/refint/Day 1.dll
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.pdb
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/Day 1.genruntimeconfig.cache
+/Users/arjun/Documents/Advent-of-Code-2025/Day 1/obj/Debug/net9.0/ref/Day 1.dll
