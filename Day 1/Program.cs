@@ -14,10 +14,8 @@
 
     return num;
 }
-
-int zeroCount = 0;        // times landed exactly on 0
-int crossedZeroCount = 0; // times passed through 0 (wrapped)
-int num = 50;             // starting dial
+int totalZeroCount = 0;   // total times landed on OR crossed 0
+int num = 50;
 
 string filePath = "input.txt";
 
@@ -30,27 +28,25 @@ try
         {
             int start = num;
             int end = GetDial(num, line);
-
-            // landed exactly on 0
-            if (end == 0)
-                zeroCount++;
-
-            // crossed 0 (wrapped around)
+            int amount = int.Parse(line.Substring(1));
             char dir = line[0];
-            if ((dir == 'R' && end < start) ||   // wrapped past 99 -> 0
-                (dir == 'L' && end > start))     // wrapped past 0 -> 99
-            {
-                crossedZeroCount++;
-            }
 
-            num = end; // update current dial
+            // count passes DURING rotation
+            int passesDuring = amount / 100;  // full circles passing 0
+
+            // add if landed exactly on 0
+            if (end == 0)
+                passesDuring++;
+
+            // total for this move
+            totalZeroCount += passesDuring;
+
+            num = end;
+
         }
     }
 
-    Console.WriteLine($"Landed on 0: {zeroCount}");
-    Console.WriteLine($"Crossed 0: {crossedZeroCount}");
-    int total = zeroCount + crossedZeroCount;
-    Console.WriteLine($"Total: {total}");
+    Console.WriteLine(totalZeroCount);
 }
 catch (FileNotFoundException)
 {
