@@ -1,11 +1,20 @@
-﻿
-int getDial(int num, string rotation)
+﻿int getDial(int num, string rotation)
 {
-    char plusMinus = rotation[0];
-    int value = int.Parse(rotation.Substring(1));
-    Console.WriteLine(value);
+    int value = int.Parse(rotation.Substring(1)); 
+
+    // move left or right
+    if (rotation[0] == 'L')
+        num -= value;
+    else
+        num += value;
+
+    // wrap between 0..99
+    num %= 100;          
+    if (num < 0) num += 100;
+
     return num;
 }
+
 int zeroCount = 0;
 int num = 50;
 
@@ -21,7 +30,9 @@ int num = 50;
             string line;
             while ((line = reader.ReadLine()) != null)
             {
-                getDial(num, line);
+                num = getDial(num, line);
+                if (num == 0) zeroCount++; 
+                Console.WriteLine(num);
             }
         }
     }
