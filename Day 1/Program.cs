@@ -7,7 +7,8 @@ int num = 50;
 
 int getDial(int num, string rotation)
 {
-    
+    char plusMinus = rotation[0];
+    int value = int.Parse(rotation.Substring(1));
     return num;
 }
 
@@ -15,7 +16,7 @@ public class StreamReaderExample
 {
     public static void Main(string[] args)
     {
-        string filePath = "input.txt"; // Replace with your file path
+        string filePath = "input.txt"; 
 
         try
         {
