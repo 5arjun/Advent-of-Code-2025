@@ -13,12 +13,11 @@
     return int.Parse(numberString[position].ToString());
 }
 
-
 string filePath = "input.txt";
+long total = 0;
 try
 {
     string fileContents = File.ReadAllText(filePath);
-
     char tokenComma = ',';
     char tokenDash = '-';
     string[] ranges = fileContents.Split(tokenComma);
@@ -29,37 +28,36 @@ try
 
         if (twoNums[0].TrimStart('0').Length % 2 != 0 && twoNums[1].TrimStart('0').Length % 2 != 0)
         {
-            Console.WriteLine($"Both ranges has odd number of digits ({twoNums[0]}-{twoNums[1]})... skipping");
+            //Console.WriteLine($"Both ranges has odd number of digits ({twoNums[0]}-{twoNums[1]})... skipping");
             continue;
         }
 
-        int lowerRangeInt = int.Parse(twoNums[0]);
-        int upperRangeInt = int.Parse(twoNums[1]);
-        for (int i = lowerRangeInt; i <= upperRangeInt; i++)
+        long lowerRangeLong = long.Parse(twoNums[0]);  
+        long upperRangeLong = long.Parse(twoNums[1]);  
+        
+        for (long i = lowerRangeLong; i <= upperRangeLong; i++)  
         {
             int symmetryCount = 0;
-            for (int j = 0; j < i.ToString().Length / 2; j++)
+            string numStr = i.ToString();  
+            int length = numStr.Length;
+            int half = length / 2;
+            
+            for (int j = 0; j < half; j++)
             {
-                if (GetDigitFromString(i, j) == GetDigitFromString(i, j + i.ToString().Length / 2))
+                if (GetDigitFromString(i, j) == GetDigitFromString(i, j + half))
                 {
-                    //Console.WriteLine($"{i}: digit at {j} is the same gang");
                     symmetryCount++;
                 }
-                if (symmetryCount == i.ToString().Length / 2)
+                if (symmetryCount == half)  
                 {
-                    Console.WriteLine ($"{i} has sequence repeated twice gangy");
+                    //Console.WriteLine($"{i} has sequence repeated twice gangy");
+                    total += i;
+                    break;  
                 }
-
             }
         }
-
-        foreach (string number in twoNums)
-        {
-            //Console.WriteLine($"{number} is a part of {string.Join("-", twoNums)}");
-        }
-
     }
-
+    Console.WriteLine($"TOTAL IS: {total}");
 }
 catch (FileNotFoundException)
 {
