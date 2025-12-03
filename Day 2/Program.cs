@@ -1,10 +1,19 @@
 ﻿
 
-string filePath = "input.txt"; 
+string filePath = "input.txt";
 try
 {
     string fileContents = File.ReadAllText(filePath);
-    Console.WriteLine("File contents:\n" + fileContents);
+    //Console.WriteLine("File contents:\n" + fileContents);
+
+    char tokenComma = ','; 
+    string[] ranges = fileContents.Split(tokenComma);
+
+    foreach (string numberRange in ranges)
+    {
+        Console.WriteLine(numberRange);
+    }
+    
 }
 catch (FileNotFoundException)
 {
