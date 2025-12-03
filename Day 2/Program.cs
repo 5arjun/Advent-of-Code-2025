@@ -16,7 +16,7 @@ try
         string[] twoNums = numberRange.Split(tokenDash);
         foreach(string number in twoNums)
         {
-            Console.WriteLine(number);
+            Console.WriteLine($"{number} is a part of {string.Join("-", twoNums)}");
         }
         
     }
