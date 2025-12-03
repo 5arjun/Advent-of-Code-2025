@@ -1,18 +1,18 @@
-﻿static int GetDigitFromString(int number, int position) //i found this online
+﻿static int GetDigitFromString(long number, int position) // Updated to long
 {
     // Position is 0-based, where 0 is the leftmost digit.
     // Example: GetDigitFromString(12345, 0) returns 1, GetDigitFromString(12345, 2) returns 3.
 
     string numberString = number.ToString();
-
     if (position < 0 || position >= numberString.Length)
     {
         throw new ArgumentOutOfRangeException(nameof(position), "Position is out of range for the given number.");
     }
+        // Convert the character at the specified position back to an integer.
 
-    // Convert the character at the specified position back to an integer.
     return int.Parse(numberString[position].ToString());
 }
+
 
 string filePath = "input.txt";
 try
