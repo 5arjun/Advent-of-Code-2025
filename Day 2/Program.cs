@@ -18,7 +18,6 @@ string filePath = "input.txt";
 try
 {
     string fileContents = File.ReadAllText(filePath);
-    //Console.WriteLine("File contents:\n" + fileContents);
 
     char tokenComma = ',';
     char tokenDash = '-';
@@ -26,12 +25,11 @@ try
 
     foreach (string numberRange in ranges)
     {
-        //Console.WriteLine(numberRange);
         string[] twoNums = numberRange.Split(tokenDash);
 
         if (twoNums[0].TrimStart('0').Length % 2 != 0 && twoNums[1].TrimStart('0').Length % 2 != 0)
         {
-            Console.WriteLine($"Both ranges has odd number of digits ({twoNums[0]}-{twoNums[1]})");
+            Console.WriteLine($"Both ranges has odd number of digits ({twoNums[0]}-{twoNums[1]})... skipping");
             continue;
         }
 
@@ -49,7 +47,7 @@ try
                 }
                 if (symmetryCount == i.ToString().Length / 2)
                 {
-                    Console.WriteLine ($"{i} is symmetrical gangy");
+                    Console.WriteLine ($"{i} has sequence repeated twice gangy");
                 }
 
             }
