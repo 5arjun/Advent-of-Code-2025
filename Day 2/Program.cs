@@ -23,40 +23,37 @@ try
     string[] ranges = fileContents.Split(tokenComma);
 
     foreach (string numberRange in ranges)
+{
+    string[] twoNums = numberRange.Split(tokenDash);
+    long lowerRangeLong = long.Parse(twoNums[0]);  
+    long upperRangeLong = long.Parse(twoNums[1]);  
+    
+    for (long i = lowerRangeLong; i <= upperRangeLong; i++)  
     {
-        string[] twoNums = numberRange.Split(tokenDash);
-
-        if (twoNums[0].TrimStart('0').Length % 2 != 0 && twoNums[1].TrimStart('0').Length % 2 != 0)
-        {
-            //Console.WriteLine($"Both ranges has odd number of digits ({twoNums[0]}-{twoNums[1]})... skipping");
-            continue;
-        }
-
-        long lowerRangeLong = long.Parse(twoNums[0]);  
-        long upperRangeLong = long.Parse(twoNums[1]);  
+        string numStr = i.ToString();  
+        int length = numStr.Length;
         
-        for (long i = lowerRangeLong; i <= upperRangeLong; i++)  
+        // Only even-length numbers can be invalid
+        if (length % 2 != 0) continue;
+        
+        int half = length / 2;
+        bool isInvalid = true;
+        
+        for (int j = 0; j < half; j++)
         {
-            int symmetryCount = 0;
-            string numStr = i.ToString();  
-            int length = numStr.Length;
-            int half = length / 2;
-            
-            for (int j = 0; j < half; j++)
+            if (GetDigitFromString(i, j) != GetDigitFromString(i, j + half))
             {
-                if (GetDigitFromString(i, j) == GetDigitFromString(i, j + half))
-                {
-                    symmetryCount++;
-                }
-                if (symmetryCount == half)  
-                {
-                    //Console.WriteLine($"{i} has sequence repeated twice gangy");
-                    total += i;
-                    break;  
-                }
+                isInvalid = false;
+                break;
             }
         }
+        
+        if (isInvalid)
+        {
+            total += i;
+        }
     }
+}
     Console.WriteLine($"TOTAL IS: {total}");
 }
 catch (FileNotFoundException)
