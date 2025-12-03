@@ -1,56 +1,97 @@
-﻿int GetDial(int num, string rotation)
-{
-    int value = int.Parse(rotation.Substring(1));
-    if (rotation[0] == 'L') num -= value;
-    else num += value;
-    num %= 100;
-    if (num < 0) num += 100;
-    return num;
-}
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
-int totalZeroCount = 0;
-int num = 50;
-string filePath = "input.txt";
-
-try
+class SafeDialSolver
 {
-    using (StreamReader reader = new StreamReader(filePath))
+    static int CountZeroCrossings(List<string> rotations)
     {
-        string line;
-        while ((line = reader.ReadLine()) != null)
+        int position = 50;
+        int zeroCount = 0;
+        
+        foreach (string rotation in rotations)
         {
-            int amount = int.Parse(line.Substring(1));
-            char dir = line[0];
+            char direction = rotation[0];
+            int distance = int.Parse(rotation.Substring(1));
             
-            int start = num;
-            
-            // Key: calculate how many times we pass 0 DURING this rotation
-            if (dir == 'R')
+            if (direction == 'R')
             {
-                // Right: passes 0 when crossing from 99→0
-                int distanceToZero = (100 - start) % 100;
-                if (amount >= distanceToZero)
-                    totalZeroCount++;  // passes 0 at least once
-                totalZeroCount += amount / 100;  // full circles
+                // Rotating right (toward higher numbers)
+                // Count how many times we pass through 0
+                int crossings = (position + distance) / 100;
+                zeroCount += crossings;
+                // Update position
+                position = (position + distance) % 100;
             }
-            else  // 'L'
+            else // direction == 'L'
             {
-                // Left: passes 0 when crossing from 0→99  
-                if (amount >= start)
-                    totalZeroCount++;  // passes 0 at least once
-                totalZeroCount += amount / 100;  // full circles
+                // Rotating left (toward lower numbers)
+                // Count how many times we pass through 0
+                int crossings = distance > position ? (distance - position + 99) / 100 : 0;
+                zeroCount += crossings;
+                // Update position
+                position = ((position - distance) % 100 + 100) % 100;
+            }
+        }
+        
+        return zeroCount;
+    }
+    
+    static void Main()
+    {
+        // Example from the puzzle
+        var exampleRotations = new List<string>
+        {
+            "L68", "L30", "R48", "L5", "R60", 
+            "L55", "L1", "L99", "R14", "L82"
+        };
+        
+        Console.WriteLine("Example trace:");
+        int position = 50;
+        int zeroCount = 0;
+        Console.WriteLine($"Start: position = {position}");
+        
+        foreach (string rotation in exampleRotations)
+        {
+            char direction = rotation[0];
+            int distance = int.Parse(rotation.Substring(1));
+            
+            int crossings;
+            if (direction == 'R')
+            {
+                crossings = (position + distance) / 100;
+                position = (position + distance) % 100;
+            }
+            else
+            {
+                crossings = distance > position ? (distance - position + 99) / 100 : 0;
+                position = ((position - distance) % 100 + 100) % 100;
             }
             
-            num = GetDial(num, line);
+            zeroCount += crossings;
+            Console.WriteLine($"{rotation}: position = {position}, crossings = {crossings}, total = {zeroCount}");
+        }
+        
+        Console.WriteLine($"\nExample result: {zeroCount}");
+        Console.WriteLine($"Expected: 6\n");
+        
+        // Read puzzle input from file
+        try
+        {
+            string[] lines = File.ReadAllLines("input.txt");
+            var puzzleInput = lines.Where(line => !string.IsNullOrWhiteSpace(line)).ToList();
+            
+            int result = CountZeroCrossings(puzzleInput);
+            Console.WriteLine($"Puzzle answer: {result}");
+        }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Error: input.txt not found in the current directory.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading file: {ex.Message}");
         }
     }
-    Console.WriteLine(totalZeroCount);
-}
-catch (FileNotFoundException)
-{
-    Console.WriteLine($"Error: The file '{filePath}' was not found.");
-}
-catch (IOException ex)
-{
-    Console.WriteLine($"An I/O error occurred: {ex.Message}");
 }
