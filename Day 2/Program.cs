@@ -1,4 +1,4 @@
-﻿static int GetDigitFromString(int number, int position)
+﻿static int GetDigitFromString(int number, int position) //i found this online
 {
     // Position is 0-based, where 0 is the leftmost digit.
     // Example: GetDigitFromString(12345, 0) returns 1, GetDigitFromString(12345, 2) returns 3.
@@ -39,12 +39,17 @@ try
         int upperRangeInt = int.Parse(twoNums[1]);
         for (int i = lowerRangeInt; i <= upperRangeInt; i++)
         {
+            int symmetryCount = 0;
             for (int j = 0; j < i.ToString().Length / 2; j++)
             {
                 if (GetDigitFromString(i, j) == GetDigitFromString(i, j + i.ToString().Length / 2))
                 {
-
-                    Console.WriteLine($"{i}: digit at {j} is the same gang");
+                    //Console.WriteLine($"{i}: digit at {j} is the same gang");
+                    symmetryCount++;
+                }
+                if (symmetryCount == i.ToString().Length / 2)
+                {
+                    Console.WriteLine ($"{i} is symmetrical gangy");
                 }
 
             }
