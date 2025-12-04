@@ -1,16 +1,35 @@
-﻿string filePath = "input.txt";
+﻿
+// ..@@.@@@@.
+// @@@.@.@.@@
+// @@@@@.@.@@
+// @.@@@@..@.
+// @@.@@@@.@@
+// .@@@@@@@.@
+// .@.@.@.@@@
+// @.@@@.@@@@
+// .@@@@@@@@.
+// @.@.@@@.@.
+string[] lines = File.ReadAllLines("input.txt");
+int rows = lines.Length;  
+int cols = lines[0].Length;  
+char[,] grid = new char[rows, cols];
 
-try
+for (int r = 0; r < rows; r++)
 {
-    string fileContents = File.ReadAllText(filePath);
-    Console.WriteLine($"{fileContents}");
+    for (int c = 0; c < cols; c++)
+    {
+        grid[r, c] = lines[r][c];
+    }
 }
+Console.WriteLine($"{grid[1,1]}");
 
-catch (FileNotFoundException)
+for(int i = 0; i < rows; i++)
 {
-    Console.WriteLine($"Error: The file '{filePath}' was not found.");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"An error occurred: {ex.Message}");
+    for (int j = 0; j < cols; j++)
+    {
+        Console.Write($"{grid[i,j]}");
+
+
+    }
+        Console.WriteLine();
 }
