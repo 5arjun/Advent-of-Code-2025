@@ -1,6 +1,5 @@
 ﻿string filePath = "input.txt";
 
-
 try
 {
     string fileContents = File.ReadAllText(filePath);
@@ -21,16 +20,16 @@ try
             while (i < j) //stops if the right index crosses left index
             {
                 int sum = bankIntArray[i] * 10 + bankIntArray[j];
-                if (sum > largest) largest = sum; 
+                if (sum > largest) largest = sum;
                 j--;
-            }
-            if (largest == 99)
-            {
-                break; //breaks since 99 is the highest poss joltage
+                if (largest == 99)
+                {
+                    break; //breaks since 99 is the highest poss joltage
+                }
             }
         }
         Console.WriteLine($"largest of bank {bank}= {largest}");
-        total+= largest;
+        total += largest;
     }
     Console.WriteLine($"TOTAL = {total}");
 
