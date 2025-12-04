@@ -4,7 +4,13 @@
 try
 {
     string fileContents = File.ReadAllText(filePath);
-    Console.WriteLine($"{fileContents}");
+    // Console.WriteLine($"{fileContents}");
+    string[] banks = fileContents.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+    foreach (char[] bank in banks.ToCharArray())
+    {
+        
+    }
+
 }
 catch (FileNotFoundException)
 {
