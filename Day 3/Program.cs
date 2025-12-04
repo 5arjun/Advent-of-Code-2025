@@ -13,8 +13,8 @@ try
 
         int length = bankIntArray.Length;
         int largest = 0;
-
-        for (int i = 0; i < length; i++)
+        
+        for (int i = 0; i < length; i++) //loop for *10 number
         {
             int j = length - 1;
             while (i < j) //stops if the right index crosses left index
