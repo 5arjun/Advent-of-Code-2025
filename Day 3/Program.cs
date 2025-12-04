@@ -8,6 +8,7 @@ try
     string[] banks = fileContents.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
     foreach (string bank in banks)
     {
+        //converting from string to char array to int array lol 
         char[] bankCharArray = bank.ToCharArray();
         int[] bankIntArray = Array.ConvertAll(bankCharArray, c => (int)Char.GetNumericValue(c));
 
@@ -17,11 +18,15 @@ try
         for (int i = 0; i < length; i++)
         {
             int j = length - 1;
-            while (i < j)
+            while (i < j) //stops if the right index crosses left index
             {
                 int sum = bankIntArray[i] * 10 + bankIntArray[j];
-                if (sum > largest) largest = sum;
+                if (sum > largest) largest = sum; 
                 j--;
+            }
+            if (largest == 99)
+            {
+                break; //breaks since 99 is the highest poss joltage
             }
         }
         Console.WriteLine($"largest of bank {bank}= {largest}");
