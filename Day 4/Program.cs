@@ -43,11 +43,11 @@ for (int i = 0; i < rows; i++)
         if (i < rows - 1 && grid[i + 1, j] == '@') neighborCount++;               // S
         if (i < rows - 1 && j < cols - 1 && grid[i + 1, j + 1] == '@') neighborCount++; // SE
 
-        // Accessible if less than 4 neighboring rolls
+        //accessible if less than 4 neighboring rolls
         if (neighborCount < 4)
         {
             accessibleRolls++;
-            Console.WriteLine($"Accessible roll at [{i},{j}] with {neighborCount} neighbors");
+            //Console.WriteLine($"Accessible roll at [{i},{j}] with {neighborCount} neighbors");
         }
     }
 }
