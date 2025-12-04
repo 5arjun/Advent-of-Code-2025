@@ -6,9 +6,12 @@ try
     string fileContents = File.ReadAllText(filePath);
     // Console.WriteLine($"{fileContents}");
     string[] banks = fileContents.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-    foreach (char[] bank in banks.ToCharArray())
+    foreach (string bank in banks)
     {
-        
+        //Console.WriteLine($"{bank}");
+        char[] bankArray = bank.ToCharArray();
+        Console.WriteLine($"{bankArray[0]}");
+
     }
 
 }
