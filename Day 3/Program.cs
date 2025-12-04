@@ -15,13 +15,9 @@ try
 
         int length = bankIntArray.Length;
         int largest = 0;
-        int bestTensDigit = 0;
+        int bestTensDigit = 0; 
         for (int i = 0; i < length; i++) //loop for *10 number
         {
-            if (bankIntArray[i] > bestTensDigit)
-            {
-                bestTensDigit = bankIntArray[i];
-            }
 
             int sum = bestTensDigit * 10 + bankIntArray[i];
             if (sum > largest) largest = sum;
@@ -30,9 +26,12 @@ try
             {
                 break; //breaks since 99 is the highest poss joltage
             }
-
+            if (bankIntArray[i] > bestTensDigit)
+            {
+                bestTensDigit = bankIntArray[i]; //tracks which digit should be used for *10
+            }
         }
-        Console.WriteLine($"largest of bank {bank}= {largest}");
+        //Console.WriteLine($"largest of bank {bank}= {largest}");
         total += largest;
     }
     Console.WriteLine($"TOTAL = {total}");
