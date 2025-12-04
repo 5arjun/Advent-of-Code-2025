@@ -4,8 +4,8 @@
 try
 {
     string fileContents = File.ReadAllText(filePath);
-    // Console.WriteLine($"{fileContents}");
     string[] banks = fileContents.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+    int total = 0; //tracks total jolts
     foreach (string bank in banks)
     {
         //converting from string to char array to int array lol 
@@ -30,7 +30,9 @@ try
             }
         }
         Console.WriteLine($"largest of bank {bank}= {largest}");
+        total+= largest;
     }
+    Console.WriteLine($"TOTAL = {total}");
 
 }
 catch (FileNotFoundException)
