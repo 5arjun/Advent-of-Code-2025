@@ -8,10 +8,23 @@ try
     string[] banks = fileContents.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
     foreach (string bank in banks)
     {
-        //Console.WriteLine($"{bank}");
-        char[] bankArray = bank.ToCharArray();
-        Console.WriteLine($"{bankArray[0]}");
+        char[] bankCharArray = bank.ToCharArray();
+        int[] bankIntArray = Array.ConvertAll(bankCharArray, c => (int)Char.GetNumericValue(c));
 
+        int length = bankIntArray.Length;
+        int largest = 0;
+
+        for (int i = 0; i < length; i++)
+        {
+            int j = length - 1;
+            while (i < j)
+            {
+                int sum = bankIntArray[i] * 10 + bankIntArray[j];
+                if (sum > largest) largest = sum;
+                j--;
+            }
+        }
+        Console.WriteLine($"largest of bank {bank}= {largest}");
     }
 
 }
