@@ -60,12 +60,12 @@ while (change)
     }
     if (counter == 0) { change = false; }
 }
-for (int i = 0; i < rows; i++)
-{
-    for (int j = 0; j < cols; j++)
-    {
-        Console.Write($"{grid[i, j]}");
-    }
-    Console.WriteLine();
-}
+// for (int i = 0; i < rows; i++)
+// {
+//     for (int j = 0; j < cols; j++)
+//     {
+//         Console.Write($"{grid[i, j]}");
+//     }
+//     Console.WriteLine();
+// }
 Console.WriteLine($"Accessible Rolls: {accessibleRolls}");
