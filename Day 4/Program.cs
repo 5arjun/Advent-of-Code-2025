@@ -22,6 +22,7 @@ for (int r = 0; r < rows; r++)//making 2d array
     }
 }
 int accessibleRolls = 0;
+
 for (int i = 0; i < rows; i++)
 {
     for (int j = 0; j < cols; j++)
@@ -47,8 +48,20 @@ for (int i = 0; i < rows; i++)
         if (neighborCount < 4)
         {
             accessibleRolls++;
+            grid[i, j] = '.';
+
             //Console.WriteLine($"Accessible roll at [{i},{j}] with {neighborCount} neighbors");
         }
+
     }
+}
+
+for (int i = 0; i < rows; i++)
+{
+    for (int j = 0; j < cols; j++)
+    {
+        Console.Write($"{grid[i, j]}");
+    }
+    Console.WriteLine();
 }
 Console.WriteLine($"Accessible Rolls: {accessibleRolls}");
