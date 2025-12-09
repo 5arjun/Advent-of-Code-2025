@@ -23,10 +23,10 @@ for (int j = 0; j < cols; j++)
 }
 
 
-int total = 0;
+long total = 0;
 for (int colIndex = 0; colIndex < cols; colIndex++)
 {
-    int result = numbers[0, colIndex];
+    long result = numbers[0, colIndex];
     int currentRow = 1;
     while (currentRow < rows)
     {
@@ -34,7 +34,7 @@ for (int colIndex = 0; colIndex < cols; colIndex++)
         int nextNum = numbers[currentRow, colIndex];
 
         if (op == '+') result += nextNum;
-        else result *= nextNum;
+        else result *= (long)nextNum;
 
         currentRow++;
     }
