@@ -41,3 +41,4 @@ for (int colIndex = 0; colIndex < cols; colIndex++)
     total += result;
 }
 Console.WriteLine($"Total: {total}");
+//total: 6957525317641
