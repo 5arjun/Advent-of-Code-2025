@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 string[] lines = File.ReadAllLines("input.txt");
-int rows = lines.Length - 1; 
+int rows = lines.Length - 1;
 int cols = lines[0].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
 
 int[,] numbers = new int[rows, cols]; //2d array of just numbers
@@ -22,7 +22,22 @@ for (int j = 0; j < cols; j++)
     operators[j] = opParts[j];
 }
 
-for(int j = 0; j < cols; j++)
+
+int total = 0;
+for (int colIndex = 0; colIndex < cols; colIndex++)
 {
-    
+    int result = numbers[0, colIndex];
+    int currentRow = 1;
+    while (currentRow < rows)
+    {
+        char op = operators[colIndex][0];
+        int nextNum = numbers[currentRow, colIndex];
+
+        if (op == '+') result += nextNum;
+        else result *= nextNum;
+
+        currentRow++;
+    }
+    total += result;
 }
+Console.WriteLine($"Total: {total}");
